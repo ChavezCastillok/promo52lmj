@@ -109,14 +109,14 @@
 
 <main class="container">
   <header id="header" class="has-text-centered">
+    <h1 class="title">{school}</h1>
     <h1 class="title is-1">
       Promoción <span class="small">200</span>52<span class="small">010</span>
-      {school}
     </h1>
     <h2 class="subtitle">Los mayores accionistas.</h2>
   </header>
 
-  <section id="page" class="section">
+  <section class="section">
     <nav class="level">
       <div class="level-item has-text-centered">
         <p class="subtitle">Filtros:</p>
@@ -252,16 +252,6 @@
   main {
     font-family: "Blinker", sans-serif;
     color: ghostwhite;
-  }
-  header {
-    padding-top: 3rem;
-    position: fixed;
-    z-index: 100;
-    width: 90%;
-  }
-
-  #page {
-    padding-top: 14rem;
   }
 
   .title,
