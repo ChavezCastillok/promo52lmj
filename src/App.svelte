@@ -34,6 +34,8 @@
   let scc = { men: 0, wem: 0 };
   let scd = { men: 0, wem: 0 };
 
+  let searching: string = "";
+
   $alumnos52.forEach((a) => {
     if (a.sex == 1) totalMen++;
     else totalWem++;
@@ -105,6 +107,14 @@
     listAlumns = $alumnos52.filter(
       (alumn) => alumn.sex == 0 && alumn.seccion == "d"
     );
+
+  $: if (searching.length > 2) {
+    listAlumns = $alumnos52.filter((alumn) =>
+      alumn.fullname.toLowerCase().includes(searching.toLowerCase())
+    );
+  } else if (searching.length < 3) {
+    listAlumns = $alumnos52;
+  }
 </script>
 
 <main class="container">
@@ -119,7 +129,15 @@
   <section class="section">
     <nav class="level">
       <div class="level-item has-text-centered">
-        <p class="subtitle">Filtros:</p>
+        <div class="control">
+          <input
+            class="input"
+            type="text"
+            placeholder="Buscar"
+            bind:value={searching}
+            on:click={() => (searching = "")}
+          />
+        </div>
       </div>
 
       <div class="level-item has-text-centered">
@@ -137,7 +155,7 @@
       <div class="level-item has-text-centered">
         <p class="subtitle">Sección:</p>
         <div class="select">
-          <select>
+          <select id="seccion">
             <option on:click={() => (viewSeccion = Seccion.all)}>Todas</option>
             <option on:click={() => (viewSeccion = Seccion.a)}>SC A</option>
             <option on:click={() => (viewSeccion = Seccion.b)}>SC B</option>
@@ -216,7 +234,7 @@
           <tfoot>
             <tr>
               <td colspan="3">SC: Segundo de Ciencias</td>
-              <td colspan="4">Liceo Militar Jauregui</td>
+              <td colspan="4">L.M.J. Liceo Militar Jauregui</td>
             </tr>
           </tfoot>
         </table>
@@ -232,12 +250,11 @@
         class="column is-flex is-justify-content-center is-align-items-center"
       >
         <p class="has-text-right">
-          <small>
+          <small id="dev">
             <span class="icon">
               <ion-icon name="code" />
             </span>
-
-            By:
+            Dev:
             <a href="https://chavezcastillok.github.io">@chavezcastillok</a>
           </small>
         </p>
@@ -273,11 +290,14 @@
     color: darkgreen;
   }
 
-  .footer a {
-    color: greenyellow;
+  #dev {
+    font-family: "Liberation Mono", "Consolas";
   }
-  .footer a:hover {
-    font-family: "monospace", "consolas";
+  #dev a {
+    color: darkslateblue;
+  }
+  #dev a:hover {
+    color: yellow;
     text-transform: uppercase;
     background-color: black;
   }

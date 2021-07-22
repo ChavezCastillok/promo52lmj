@@ -1,7 +1,14 @@
 <script>
   "use strict";
 
+  import ModalImage from "./ModalImage.svelte";
+
   export let alumno;
+
+  let modalIMG = false;
+  const active_modal = () => {
+    modalIMG = true;
+  };
 </script>
 
 <article class="card">
@@ -19,7 +26,11 @@
   </header>
   <article class="card-image">
     <figure class="image is-3by4">
-      <img src={alumno.profile_picture} alt="imagen de perfil" />
+      <img
+        src={alumno.profile_picture}
+        alt="imagen de perfil"
+        on:click={active_modal}
+      />
     </figure>
   </article>
 
@@ -27,6 +38,12 @@
     <p>Seccion: {alumno.seccion.toUpperCase()}</p>
   </section>
 </article>
+
+<ModalImage
+  src={alumno.profile_picture}
+  alt="profile-picture"
+  bind:activemodal={modalIMG}
+/>
 
 <style>
   .card {
